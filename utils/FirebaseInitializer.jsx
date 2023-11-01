@@ -5,17 +5,22 @@ const FirebaseInitializer = ({ children }) => {
   useEffect(() => {
     // Инициализация Firebase с вашими настройками
     const config = {
-      apiKey: "your-api-key",
-      authDomain: "your-auth-domain",
-      projectId: "your-project-id",
-      storageBucket: "your-storage-bucket",
-      messagingSenderId: "your-messaging-sender-id",
-      appId: "your-app-id",
+      apiKey: "AIzaSyDzmso9Xo-AeMGKBvuyowlTiO676j3R87s",
+      authDomain: "test--map-62e0d.firebaseapp.com",
+      projectId: "test--map-62e0d",
+      storageBucket: "test--map-62e0d.appspot.com",
+      messagingSenderId: "833142357658",
+      appId: "1:833142357658:web:586114b7b8302b7dbc2923",
+      measurementId: "G-G1S61XY4VT",
     };
     firebase.initializeApp(config);
   }, []);
 
-  return children;
+  return (
+    <View>
+      <Text>{children}</Text>
+    </View>
+  );
 };
 
 export default FirebaseInitializer;
