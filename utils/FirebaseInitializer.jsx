@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import firebase from "firebase/app";
+import { initializeApp } from "firebase/app";
 
 const FirebaseInitializer = ({ children }) => {
   useEffect(() => {
@@ -13,7 +13,7 @@ const FirebaseInitializer = ({ children }) => {
       appId: "1:833142357658:web:586114b7b8302b7dbc2923",
       measurementId: "G-G1S61XY4VT",
     };
-    firebase.initializeApp(config);
+    initializeApp(config);
   }, []);
 
   return (
