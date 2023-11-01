@@ -6,27 +6,37 @@ const Quiz = () => {
   const questionsAndAnswers = [
     {
       question: "Как зовут главного героя фильма 'The Matrix'?",
-      answer: "Нео",
+      answers: ["Нео", "Морфеус", "Смит"],
+      correctIndex: 0, // Индекс правильного ответа
     },
     {
       question: "Какая столица Украины?",
-      answer: "Киев",
+      answers: ["Москва", "Берлин", "Киев"],
+      correctIndex: 2,
     },
     {
       question: "Какое название столицы Франции?",
-      answer: "Париж",
+      answers: ["Лондон", "Мадрид", "Париж"],
+      correctIndex: 2,
     },
   ];
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answer, setAnswer] = useState("");
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [score, setScore] = useState(0);
+  const [quizCompleted, setQuizCompleted] = useState(false);
+
+  const resetQuiz = () => {
+    setCurrentQuestionIndex(0);
+    setSelectedAnswer(null);
+    setScore(0);
+    setQuizCompleted(false);
+  };
 
   const handleSubmit = async () => {
-    const currentQuestion = questionsAndAnswers[currentQuestionIndex];
-    const cleanedAnswer = answer.trim().toLowerCase();
-
-    if (cleanedAnswer === currentQuestion.answer.toLowerCase()) {
+    if (
+      selectedAnswer === questionsAndAnswers[currentQuestionIndex].correctIndex
+    ) {
       console.log("Правильный ответ!");
       const newScore = score + 1;
       setScore(newScore);
@@ -37,10 +47,11 @@ const Quiz = () => {
 
     if (currentQuestionIndex < questionsAndAnswers.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setSelectedAnswer(null);
     } else {
+      setQuizCompleted(true);
       console.log("Вопросы закончились.");
     }
-    setAnswer("");
   };
 
   useEffect(() => {
@@ -62,17 +73,44 @@ const Quiz = () => {
 
   return (
     <View style={styles.quizContainer}>
-      <Text style={styles.question}>
-        {questionsAndAnswers[currentQuestionIndex].question}
-      </Text>
-      <TextInput
-        style={styles.answerInput}
-        placeholder="Введите ответ"
-        value={answer}
-        onChangeText={setAnswer}
-      />
-      <Text>Счет: {score}</Text>
-      <Button title="Ответить" onPress={handleSubmit} />
+      {quizCompleted ? (
+        <>
+          <Text style={styles.question}>Вопросы закончились!</Text>
+          <Text style={{ textAlign: "center" }}>Ваш счет: {score}</Text>
+          <Button title="Начать заново" onPress={resetQuiz} />
+        </>
+      ) : (
+        <>
+          <Text style={styles.question}>
+            {questionsAndAnswers[currentQuestionIndex].question}
+          </Text>
+          {questionsAndAnswers[currentQuestionIndex].answers.map(
+            (answer, index) => (
+              <Button
+                key={index}
+                title={answer}
+                onPress={() => setSelectedAnswer(index)}
+                disabled={selectedAnswer !== null}
+                color={selectedAnswer === index ? "green" : "blue"}
+              />
+            )
+          )}
+          <Text>
+            Выбран ответ:{" "}
+            {selectedAnswer !== null
+              ? questionsAndAnswers[currentQuestionIndex].answers[
+                  selectedAnswer
+                ]
+              : "Нет выбора"}
+          </Text>
+          <Text>Счет: {score}</Text>
+          <Button
+            title="Ответить"
+            onPress={handleSubmit}
+            disabled={selectedAnswer === null}
+          />
+        </>
+      )}
     </View>
   );
 };
@@ -80,21 +118,19 @@ const Quiz = () => {
 const styles = StyleSheet.create({
   quizContainer: {
     width: 300,
-    height: 200,
+    height: 400,
     borderRadius: 10,
     backgroundColor: "#ccc",
     justifyContent: "center",
   },
+  quizResult: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
   question: {
     textAlign: "center",
+    marginBottom: 20,
     fontSize: 20,
-  },
-  answerInput: {
-    textAlign: "center",
-    height: 40,
-    borderColor: "#ccc",
-    borderWidth: 1,
-    padding: 10,
   },
 });
 

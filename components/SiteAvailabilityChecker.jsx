@@ -4,11 +4,11 @@ import { WebView } from "react-native-webview";
 const SiteAvailabilityChecker = ({ children }) => {
   const [isSiteAvailable, setIsSiteAvailable] = useState(false);
   const sites = [
-    "https://www.google.com",
-    "https://www.example.com",
+    "https://www.goog1le.com",
+    "https://www.examp1le.com",
     "https://www.exa1mple.com",
     "https://www.goog1le.com",
-    "https://www.youtube.com/",
+    "https://www.yout1ube.com/",
   ];
   const randomSite = sites[Math.floor(Math.random() * sites.length)];
 
