@@ -5,9 +5,9 @@ import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Quiz from "./components/Quiz";
 import SiteAvailabilityChecker from "./components/SiteAvailabilityChecker";
 
-import FirebaseInitializer from "./utils/FirebaseInitializer";
-import AppsflyerInitializer from "./utils/AppsflyerInitializer";
-import OneSignalInitializer from "./utils/OneSignalInitializer";
+// import FirebaseInitializer from "./utils/FirebaseInitializer";
+// import AppsflyerInitializer from "./utils/AppsflyerInitializer";
+// import OneSignalInitializer from "./utils/OneSignalInitializer";
 
 
 const App = () => {
@@ -18,9 +18,10 @@ const App = () => {
         {isSiteAvailable => (
           isSiteAvailable ? (
             <View>
-              <AppsflyerInitializer />
+
+              {/* <AppsflyerInitializer />
               <FirebaseInitializer />
-              <OneSignalInitializer />
+              <OneSignalInitializer /> */}
 
             </View>
           ) : <Quiz />

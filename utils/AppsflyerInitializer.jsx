@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import Appsflyer from "appsflyer";
+import appsflyer from "react-native-appsflyer";
 
 const AppsflyerInitializer = ({ children }) => {
   useEffect(() => {
     // Инициализация Appsflyer с вашими настройками
-    Appsflyer.initSdk({ devKey: "qwe1231231234", appId: "4512351233" });
+    appsflyer.initSdk({ devKey: "qwe1231231234", appId: "4512351233" });
   }, []);
 
   return (
