@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// App.js
+import React, { useEffect } from "react";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+;
+import Quiz from "./components/Quiz";
+import SiteAvailabilityChecker from "./components/SiteAvailabilityChecker";
 
-export default function App() {
+
+const App = () => {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <SiteAvailabilityChecker>
+        {isSiteAvailable => (
+          isSiteAvailable ? (
+            <View>
+              <Text>Сайт доступен</Text>
+
+            </View>
+          ) : <Quiz />
+        )}
+      </SiteAvailabilityChecker>
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
+
+export default App;
