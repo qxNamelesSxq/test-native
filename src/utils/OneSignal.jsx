@@ -1,17 +1,11 @@
-import { useEffect } from "react";
-import OneSignal from "react-native-onesignal";
+import { LogLevel, OneSignal } from "react-native-onesignal";
 
-const appID = "112312314124qweq";
-const appSecret = "secret12351233";
-const oneSignalInitOptions = {
-  appID,
-  appSecret,
-  autoRegister: true,
-  promptForPushNotifications: true,
-};
+OneSignal.Debug.setLogLevel(LogLevel.Verbose);
 
-export default {
-  initialize() {
-    OneSignal.init(oneSignalInitOptions);
-  },
-};
+OneSignal.initialize("Q13245789001723");
+
+OneSignal.Notifications.requestPermission(true);
+
+OneSignal.Notifications.addEventListener("click", (event) => {
+  console.log("OneSignal: notification clicked:", event);
+});
