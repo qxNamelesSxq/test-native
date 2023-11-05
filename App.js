@@ -1,16 +1,16 @@
 // App.js
 import React, { useEffect } from "react";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-;
+import { SafeAreaView, StyleSheet, Text, View, ActivityIndicator } from "react-native";
+
 import Quiz from "./components/Quiz";
 import SiteAvailabilityChecker from "./components/SiteAvailabilityChecker";
 
-// import FirebaseInitializer from "./utils/FirebaseInitializer";
-// import AppsflyerInitializer from "./utils/AppsflyerInitializer";
-// import OneSignalInitializer from "./utils/OneSignalInitializer";
+import FirebaseApp from "./src/utils/Firebase";
+import AppsflyerTest from "./src/utils/Appsflyer";
 
 
 const App = () => {
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -18,13 +18,13 @@ const App = () => {
         {isSiteAvailable => (
           isSiteAvailable ? (
             <View>
-
-              {/* <AppsflyerInitializer />
-              <FirebaseInitializer />
-              <OneSignalInitializer /> */}
-
+              <Quiz />
             </View>
-          ) : <Quiz />
+          ) : (
+            <Text style={{ textAlign: "center" }}>
+              Сайт недоступен.
+            </Text>
+          )
         )}
       </SiteAvailabilityChecker>
     </SafeAreaView>
